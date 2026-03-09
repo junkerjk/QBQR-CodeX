@@ -1,0 +1,278 @@
+.container {
+  padding: 30rpx;
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-section {
+  margin-bottom: 40rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.order-no {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  display: block;
+}
+
+/* 卡片通用 */
+.card {
+  border-radius: 32rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+/* 用户卡片 */
+.user-card {
+  background-color: #FFF5EC;
+  border: 1rpx solid #FFE0B2;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid rgba(255, 152, 0, 0.2);
+  margin-bottom: 30rpx;
+}
+
+.avatar-box {
+  width: 96rpx;
+  height: 96rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+  margin-right: 24rpx;
+}
+
+.avatar-text {
+  font-size: 40rpx;
+  color: #333;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rpx;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 12rpx;
+}
+
+.user-phone {
+  font-size: 24rpx;
+  color: #FF9800;
+  margin-right: 12rpx;
+  font-family: monospace;
+}
+
+.role-tag {
+  font-size: 20rpx;
+  color: #999;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.dept-name {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.time-section .label {
+  font-size: 22rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.time-box {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  display: flex;
+  align-items: center;
+  border: 1rpx solid #FFE0B2;
+}
+
+.time-box .icon {
+  font-size: 28rpx;
+  margin-right: 16rpx;
+}
+
+.time-range {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.time-range .arrow {
+  margin: 0 12rpx;
+  color: #CCC;
+}
+
+.duration-tag {
+  font-size: 20rpx;
+  color: #999;
+  background-color: #F5F5F5;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+/* 详情卡片 */
+.detail-card {
+  background-color: #F9F9F9;
+  border: 1rpx solid #EEE;
+}
+
+.section-label {
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 16rpx;
+  font-size: 26rpx;
+}
+
+.info-row .label {
+  color: #999;
+  width: 140rpx;
+}
+
+.info-row .value {
+  color: #333;
+  flex: 1;
+  font-weight: 500;
+}
+
+.value-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-item {
+  margin-bottom: 8rpx;
+  font-weight: 500;
+}
+
+.list-item:last-child {
+  margin-bottom: 0;
+}
+
+.remark-section {
+  margin-bottom: 40rpx;
+}
+
+.remark-box {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: flex-start;
+  min-height: 160rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.02);
+  border: 1rpx solid #EEE;
+}
+
+.remark-box .icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  margin-top: 4rpx;
+}
+
+.remark-text {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.6;
+}
+
+
+/* 提示 */
+.tips-box {
+  display: flex;
+  align-items: flex-start;
+  padding: 24rpx;
+  background-color: #FFF9F2;
+  border-radius: 16rpx;
+  border: 1rpx solid #FFE0B2;
+  margin-bottom: 40rpx;
+}
+
+.tips-text {
+  font-size: 22rpx;
+  color: #666;
+  margin-left: 12rpx;
+  line-height: 1.5;
+}
+
+/* 底部按钮 */
+.bottom-bar {
+  margin-top: auto;
+  display: flex;
+  gap: 24rpx;
+  padding-bottom: 40rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 100rpx;
+  border-radius: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.action-btn:active {
+  transform: scale(0.96);
+}
+
+.reject-btn {
+  background-color: #fff;
+  color: #F44336;
+  border: 4rpx solid #F44336;
+}
+
+.approve-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  box-shadow: 0 8rpx 20rpx rgba(76, 175, 80, 0.3);
+}
+
+.btn-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}

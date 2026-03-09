@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 借用时间 -->
+  <view class="form-card">
+    <view class="section-header">
+      <text class="section-icon">📅</text>
+      <text class="section-title">借用时间</text>
+    </view>
+    <view class="date-picker-row">
+      <picker mode="date" value="{{startDate}}" start="{{today}}" bindchange="onStartDateChange">
+        <view class="date-box">
+          <text class="date-icon">🕒</text>
+          <text class="date-text">{{startDate}}</text>
+        </view>
+      </picker>
+      <text class="date-arrow">➔</text>
+      <picker mode="date" value="{{endDate}}" start="{{startDate}}" bindchange="onEndDateChange">
+        <view class="date-box">
+          <text class="date-icon">📅</text>
+          <text class="date-text">{{endDate}}</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 需求附言 -->
+  <view class="form-card remark-card">
+    <view class="section-header">
+      <text class="section-icon">📝</text>
+      <text class="section-title">需求附言</text>
+    </view>
+    <view class="textarea-wrapper">
+      <textarea 
+        class="remark-input" 
+        placeholder="请输入详细的设备用途、场景描述及特殊制作需求..." 
+        maxlength="64" 
+        bindinput="onRemarkInput" 
+        value="{{remark}}"
+        cursor-spacing="50"
+        adjust-position="{{true}}"
+      />
+      <text class="word-limit">{{remark.length}}/64</text>
+    </view>
+  </view>
+
+  <!-- 快捷套餐 -->
+  <view class="section-header package-header">
+    <text class="section-icon">📦</text>
+    <text class="section-title">快捷套餐</text>
+    <text class="section-subtitle">(点击选择)</text>
+  </view>
+
+  <view class="package-grid">
+    <view 
+      class="package-item {{selectedPackage === item.id ? 'active' : ''}}" 
+      wx:for="{{packages}}" 
+      wx:key="id" 
+      bindtap="onSelectPackage" 
+      data-id="{{item.id}}"
+    >
+      <view class="pkg-main">
+        <view class="pkg-icon-box" style="background-color: {{item.bgColor}}">
+          <text class="pkg-emoji">{{item.emoji}}</text>
+        </view>
+        <view class="pkg-content">
+          <view class="pkg-title-row">
+            <text class="pkg-name">{{item.name}}</text>
+            <view class="pkg-check" wx:if="{{selectedPackage === item.id}}">
+              <icon type="success_no_circle" size="10" color="#FFFFFF"/>
+            </view>
+          </view>
+          <text class="pkg-desc" style="white-space: pre-wrap;">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="footer-btn-box">
+    <button class="submit-btn" bindtap="onSubmit">提交预约申请</button>
+  </view>
+</view>

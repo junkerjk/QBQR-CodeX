@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/reserve/reserve",
+    "pages/inventory/inventory",
+    "pages/mine/mine",
+    "pages/approval/approval",
+    "pages/checkout/checkout",
+    "pages/inbound/inbound",
+    "pages/outbound/outbound",
+    "pages/my-reserves/my-reserves"
+  ],
+  "window": {
+    "backgroundColor": "#F5F5F5",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF9800",
+    "navigationBarTitleText": "快借快还",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF9800",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/reserve/reserve",
+        "text": "领用预约",
+        "iconPath": "assets/icons/reserve.png",
+        "selectedIconPath": "assets/icons/reserve_active.png"
+      },
+      {
+        "pagePath": "pages/inventory/inventory",
+        "text": "出入库",
+        "iconPath": "assets/icons/inventory.png",
+        "selectedIconPath": "assets/icons/inventory_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/icons/mine.png",
+        "selectedIconPath": "assets/icons/mine_active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

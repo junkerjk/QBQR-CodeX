@@ -1,0 +1,210 @@
+.container {
+  padding: 30rpx;
+  background-color: #F7F8FA;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-card {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.02);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-subtitle {
+  font-size: 20rpx;
+  color: #999;
+  font-weight: normal;
+  margin-left: 8rpx;
+}
+
+/* 时间选择 */
+.date-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-box {
+  background-color: #F7F7F7;
+  border-radius: 16rpx;
+  padding: 16rpx 24rpx;
+  display: flex;
+  align-items: center;
+  min-width: 220rpx;
+  border: 1rpx solid #F0F0F0;
+}
+
+.date-icon {
+  font-size: 24rpx;
+  margin-right: 12rpx;
+}
+
+.date-text {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.date-arrow {
+  color: #DDD;
+  font-size: 28rpx;
+}
+
+/* 备注 */
+.remark-card {
+  margin-bottom: 20rpx;
+}
+
+.textarea-wrapper {
+  background-color: #FFF3E0;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  height: 140rpx;
+  position: relative;
+  border: 1rpx solid #FFE0B2;
+}
+
+.remark-input {
+  width: 100%;
+  height: 100rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.4;
+}
+
+.word-limit {
+  position: absolute;
+  bottom: 16rpx;
+  right: 20rpx;
+  font-size: 20rpx;
+  color: #FFB74D;
+}
+
+/* 套餐选择 */
+.package-header {
+  margin-top: 10rpx;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24rpx;
+  margin-bottom: 40rpx;
+}
+
+.package-item {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx 24rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+  height: 160rpx;
+  display: flex;
+  align-items: center;
+}
+
+.package-item.active {
+  border-color: #FF9800;
+  background-color: #FFF8E1;
+}
+
+.pkg-main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.pkg-icon-box {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.pkg-emoji {
+  font-size: 44rpx;
+}
+
+.pkg-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.pkg-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6rpx;
+}
+
+.pkg-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.pkg-check {
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #FF9800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pkg-desc {
+  font-size: 20rpx;
+  color: #999;
+  line-height: 1.3;
+  display: block;
+}
+
+/* 底部按钮 */
+.footer-btn-box {
+  margin-top: auto;
+  padding: 20rpx 0;
+}
+
+.submit-btn {
+  background-color: #FF9800 !important;
+  color: #fff !important;
+  border-radius: 50rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10rpx 20rpx rgba(255, 152, 0, 0.2);
+}
+
+.submit-btn:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}

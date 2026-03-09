@@ -1,0 +1,13 @@
+﻿# WeChat Mini Program artifacts
+miniprogram_npm/
+
+# General build/cache artifacts
+node_modules/
+build/
+dist/
+coverage/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

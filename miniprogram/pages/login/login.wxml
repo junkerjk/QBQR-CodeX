@@ -1,0 +1,27 @@
+<view class="container login-container">
+  <view class="header">
+    <view class="logo-placeholder">📦</view>
+    <text class="title">快借快还</text>
+    <text class="subtitle">好借好还 再借不难</text>
+  </view>
+
+  <view class="card form-box">
+    <text class="welcome-text">欢迎使用《快借快还》\n请绑定手机号与姓名进行登录</text>
+    
+    <view class="input-group">
+      <text class="icon">👤</text>
+      <input class="input" type="text" placeholder="请输入您的真实姓名" bindinput="onNameInput" value="{{name}}" />
+    </view>
+
+    <view class="input-group">
+      <text class="icon">📱</text>
+      <input class="input" type="number" placeholder="请输入绑定的手机号" bindinput="onPhoneInput" value="{{phone}}" maxlength="11" />
+    </view>
+
+    <button class="btn-primary login-btn" bindtap="onLogin">登录绑定</button>
+  </view>
+
+  <view class="footer">
+    <text class="footer-text">由 CodeX 优化测试</text>
+  </view>
+</view>

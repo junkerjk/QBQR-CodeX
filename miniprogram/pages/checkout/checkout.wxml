@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="scan-box" bindtap="onScan">
+    <icon type="search" size="80" color="#FF9800"/>
+    <text class="scan-tips">点击扫描用户预约二维码</text>
+  </view>
+
+  <view class="result-card" wx:if="{{orderInfo}}">
+    <view class="card-title">预约详情</view>
+    <view class="info-row"><text class="label">申请人：</text><text class="value">{{orderInfo.applicant}}</text></view>
+    <view class="info-row"><text class="label">物品：</text><text class="value">{{orderInfo.itemName}}</text></view>
+    <view class="info-row"><text class="label">数量：</text><text class="value">{{orderInfo.count}}</text></view>
+    
+    <button class="confirm-btn" type="primary" bindtap="onConfirmCheckout">确认放行</button>
+  </view>
+</view>

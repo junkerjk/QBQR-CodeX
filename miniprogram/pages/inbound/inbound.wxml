@@ -1,0 +1,90 @@
+<view class="container">
+  <scroll-view scroll-y class="content-scroll">
+    <!-- 借用码卡片 -->
+    <view class="card code-card">
+      <view class="code-header">
+        <view class="code-info">
+          <text class="label">借用码</text>
+          <text class="code-text">{{order.borrowCode || '---'}}</text>
+        </view>
+        <view class="status-badge">归还中</view>
+      </view>
+      
+      <view class="user-details">
+        <view class="detail-item">
+          <text class="label">使用人</text>
+          <view class="value-row">
+            <text class="icon">👤</text>
+            <text>{{order.applicant}} ({{order.dept}})</text>
+          </view>
+        </view>
+        <view class="detail-item">
+          <text class="label">借出时间</text>
+          <view class="value-row">
+            <text>{{order.outboundDate}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 提示 -->
+    <view class="tips-box">
+      <icon type="info" size="14" color="#FF9800"/>
+      <text class="tips-text">请库管员仔细核对实物数量与状态。勾选右侧开关确认归还，未勾选的设备将继续保持“借出”状态。</text>
+    </view>
+
+    <!-- 设备清单 -->
+    <view class="section-title">设备清单</view>
+    
+    <view class="empty-box" wx:if="{{totalBorrowed === 0}}">
+      <text>本次借用无设备出库，可直接确认入库</text>
+    </view>
+
+    <view class="asset-list" wx:else>
+      <view 
+        class="asset-item {{item.returned ? 'returned' : ''}}" 
+        wx:for="{{borrowedItems}}" 
+        wx:key="id"
+      >
+        <view class="asset-main">
+          <view class="asset-icon">📦</view>
+          <view class="asset-info">
+            <text class="asset-name">{{item.name}}</text>
+            <text class="asset-sub">数量: {{item.count}} <text wx:if="{{item.returnedCount > 0}}" style="color: #4CAF50; margin-left: 10rpx;">(已归还: {{item.returnedCount}})</text></text>
+            <text class="return-time" wx:if="{{item.returned}}">已于 {{order.returnDate || '近期'}} 归还</text>
+          </view>
+        </view>
+
+        <view class="stepper-box" wx:if="{{!item.returned}}">
+          <view class="stepper">
+            <view class="stepper-btn minus {{item.returnCount <= 0 ? 'disabled' : ''}}" bindtap="onMinus" data-index="{{index}}">-</view>
+            <view class="stepper-num">{{item.returnCount}}</view>
+            <view class="stepper-btn plus {{item.returnCount >= item.remainCount ? 'disabled' : ''}}" bindtap="onPlus" data-index="{{index}}">+</view>
+          </view>
+          <text class="toggle-label {{item.returnCount > 0 ? 'active' : ''}}">{{item.returnCount > 0 ? '确认归还' : '待确认'}}</text>
+        </view>
+        
+        <view class="returned-badge" wx:else>
+          <icon type="success_no_circle" size="12" color="#4CAF50"/>
+          <text>已入库</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar">
+    <view class="summary-row">
+      <view class="summary-left">
+        <text>本次归还: </text>
+        <text class="highlight">{{confirmedCount}}</text>
+        <text> / {{totalBorrowed}} 件</text>
+      </view>
+      <text class="summary-right">总计借出: {{totalBorrowed}} 件</text>
+    </view>
+    <button class="confirm-btn" bindtap="onConfirm">
+      <text class="icon">📥</text>
+      <text>确认入库</text>
+    </button>
+  </view>
+</view>

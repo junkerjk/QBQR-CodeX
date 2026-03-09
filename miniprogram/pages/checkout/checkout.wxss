@@ -1,0 +1,51 @@
+.container {
+  padding: 40rpx;
+  background-color: #F5F7FA;
+  min-height: 100vh;
+}
+
+.scan-box {
+  background-color: #fff;
+  height: 400rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx dashed #FF9800;
+  margin-bottom: 40rpx;
+}
+
+.scan-tips {
+  margin-top: 30rpx;
+  color: #FF9800;
+  font-size: 32rpx;
+}
+
+.result-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.card-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+}
+
+.label { color: #999; width: 150rpx; }
+.value { color: #333; font-weight: bold; }
+
+.confirm-btn {
+  margin-top: 40rpx;
+  background-color: #FF9800 !important;
+}

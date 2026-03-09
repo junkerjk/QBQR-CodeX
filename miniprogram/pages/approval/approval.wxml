@@ -1,0 +1,106 @@
+<view class="container">
+  <view class="header-section">
+    <text class="page-title">借用申请</text>
+    <text class="order-no" wx:if="{{order.borrowCode}}">使用码：{{order.borrowCode}}</text>
+  </view>
+
+  <!-- 申请人信息卡片 -->
+  <view class="card user-card">
+    <view class="user-header">
+      <view class="avatar-box">
+        <text class="avatar-text">{{firstChar}}</text>
+      </view>
+      <view class="user-info">
+        <view class="name-row">
+          <text class="user-name">{{order.applicant}}</text>
+          <text class="user-phone">{{order.phone}}</text>
+          <text class="role-tag">申请人</text>
+        </view>
+        <text class="dept-name">{{order.dept}}</text>
+      </view>
+    </view>
+    
+    <view class="time-section">
+      <text class="label">预约时间段</text>
+      <view class="time-box">
+        <text class="icon">📅</text>
+        <view class="time-range">
+          <text>{{order.startDate}}</text>
+          <text class="arrow">➔</text>
+          <text>{{order.endDate}}</text>
+        </view>
+        <text class="duration-tag">共{{totalDays}}天</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 出入库信息卡片 (仅在已出库时显示) -->
+  <view class="card detail-card" wx:if="{{order.outboundDate}}">
+    <text class="section-label">出入库信息</text>
+    <view class="info-row">
+      <text class="label">出库时间：</text>
+      <text class="value">{{order.outboundDate}}</text>
+    </view>
+    <view class="info-row" wx:if="{{order.inboundDate}}">
+      <text class="label">归还时间：</text>
+      <text class="value">{{order.inboundDate}}</text>
+    </view>
+    
+    <block wx:if="{{order.unreturnedAssets.length > 0 || order.returnedAssets.length > 0}}">
+      <view class="info-row" wx:if="{{order.unreturnedAssets.length > 0}}">
+        <text class="label">未归还设备：</text>
+        <view class="value-list">
+          <text class="list-item" style="color: #FF9800;" wx:for="{{order.unreturnedAssets}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+      <view class="info-row" wx:if="{{order.returnedAssets.length > 0}}">
+        <text class="label">已归还设备：</text>
+        <view class="value-list">
+          <text class="list-item" style="color: #4CAF50;" wx:for="{{order.returnedAssets}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="info-row">
+        <text class="label">出库设备：</text>
+        <view class="value-list">
+          <text class="list-item" wx:for="{{order.allAssets}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view class="info-row">
+      <text class="label">设备总数：</text>
+      <text class="value">{{order.count || 0}} 件</text>
+    </view>
+  </view>
+
+  <!-- 详情卡片 -->
+  <view class="card detail-card">
+    <view class="remark-section">
+      <text class="section-label">申请用途附言</text>
+      <view class="remark-box">
+        <text class="icon">📹</text>
+        <text class="remark-text">{{order.remark || '未填写详细用途'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-box" wx:if="{{order.status === '待审批' && isAdmin}}">
+    <icon type="info" size="16" color="#FF9800"/>
+    <text class="tips-text">请确认申请信息无误。同意申请后将生成借用码并通知申请人。</text>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar" wx:if="{{order.status === '待审批' && isAdmin}}">
+    <button class="action-btn reject-btn" bindtap="onReject">
+      <text class="btn-icon">✕</text>
+      <text>拒绝申请</text>
+    </button>
+    <button class="action-btn approve-btn" bindtap="onApprove">
+      <text class="btn-icon">✓</text>
+      <text>同意申请</text>
+    </button>
+  </view>
+</view>

@@ -1,0 +1,174 @@
+﻿<view class="container">
+  <!-- 无权限提示 (仅使用人可见) -->
+  <view class="no-permission" wx:if="{{!isAdmin}}">
+    <icon type="warn" size="64" color="#ccc"/>
+    <text class="tips">您没有权限访问此页面</text>
+    <text class="sub-tips">该页面仅限库管员使用</text>
+  </view>
+
+  <!-- 库管员界面 -->
+  <view class="admin-panel" wx:else>
+    <!-- 顶部业务处理 -->
+    <view class="section-header">
+      <view class="title-row">
+        <text class="icon">📦</text>
+        <text class="title">业务处理</text>
+      </view>
+      <button class="export-btn" bindtap="onExport">
+        <text class="btn-icon">📤</text>
+        <text>数据导出</text>
+      </button>
+    </view>
+
+    <!-- 待审批列表卡片 -->
+    <view class="card approval-card">
+      <view class="card-header">
+        <text class="card-title">待审批申请</text>
+        <text class="card-count">共 {{totalPending}} 条</text>
+      </view>
+
+      <scroll-view scroll-y class="order-list pending-list">
+        <view class="empty-box" wx:if="{{pendingOrders.length === 0}}">
+          <text>暂无待处理申请</text>
+        </view>
+
+        <block wx:for="{{pendingOrders}}" wx:key="id">
+          <view
+            class="order-item compact"
+            bindtap="onOrderClick"
+            data-id="{{item.id}}"
+          >
+            <view class="user-avatar" style="background-color: {{index % 2 === 0 ? '#FFF3E0' : '#E3F2FD'}}">
+              {{item.firstChar}}
+            </view>
+            <view class="order-info">
+              <view class="user-row">
+                <text class="user-name">{{item.applicant}}</text>
+                <text class="dept-tag">{{item.dept}}</text>
+              </view>
+              <text class="order-time">{{item.formatTime}}</text>
+              <text class="order-pkg">{{item.packageName}}</text>
+            </view>
+            <view class="status-tag">待审批</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+
+    <!-- 过去60天记录卡片 -->
+    <view class="card history-card">
+      <view class="card-header">
+        <text class="card-title">过去60天记录</text>
+        <text class="card-count">不含已拒绝</text>
+      </view>
+
+      <scroll-view scroll-y class="order-list history-list">
+        <view class="empty-box" wx:if="{{recentOrders.length === 0}}">
+          <text>暂无近期记录</text>
+        </view>
+
+        <block wx:for="{{recentOrders}}" wx:key="id">
+          <view
+            class="order-item"
+            bindtap="onOrderClick"
+            data-id="{{item.id}}"
+          >
+            <view class="user-avatar" style="background-color: #F5F5F5; color: #999;">
+              {{item.firstChar}}
+            </view>
+            <view class="order-info">
+              <view class="user-row">
+                <text class="user-name">{{item.applicant}}</text>
+                <text class="dept-tag">{{item.dept}}</text>
+              </view>
+              <text class="order-time">{{item.formatTime}}</text>
+              <text class="order-pkg">{{item.packageName}}</text>
+            </view>
+            <view class="status-tag {{item.statusClass}}">{{item.status}}</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+
+    <!-- 底部扫码操作 -->
+    <view class="bottom-actions">
+      <view class="scan-btn scan-out" bindtap="onScanOut">
+        <view class="icon-circle">
+          <text class="icon">📤</text>
+        </view>
+        <text class="btn-text">扫码出库</text>
+      </view>
+      <view class="scan-btn scan-in" bindtap="onScanIn">
+        <view class="icon-circle">
+          <text class="icon">📥</text>
+        </view>
+        <text class="btn-text">扫码入库</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导出筛选弹窗 -->
+  <view class="export-mask" wx:if="{{showExportDialog}}" bindtap="onCloseExportDialog">
+    <view class="export-dialog" catchtap="noop">
+      <view class="export-title">导出筛选条件</view>
+
+      <view class="export-section">
+        <text class="export-label required">时间范围</text>
+        <view class="date-range">
+          <picker mode="date" value="{{exportForm.startDate}}" bindchange="onExportStartDateChange">
+            <view class="date-cell">{{exportForm.startDate || '开始日期'}}</view>
+          </picker>
+          <text class="date-sep">至</text>
+          <picker mode="date" value="{{exportForm.endDate}}" start="{{exportForm.startDate}}" bindchange="onExportEndDateChange">
+            <view class="date-cell">{{exportForm.endDate || '结束日期'}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="export-section">
+        <text class="export-label required">订单状态（多选）</text>
+        <checkbox-group bindchange="onExportStatusChange">
+          <view class="check-grid">
+            <label class="check-item" wx:for="{{statusOptions}}" wx:key="label">
+              <checkbox value="{{item.label}}" checked="{{item.checked}}" color="#FF9800"/>
+              <text>{{item.label}}</text>
+            </label>
+          </view>
+        </checkbox-group>
+      </view>
+
+      <view class="export-section">
+        <text class="export-label">部门（多选）</text>
+        <checkbox-group bindchange="onExportDeptChange">
+          <scroll-view scroll-y class="dept-scroll" wx:if="{{deptOptions.length > 0}}">
+            <view class="check-grid single-col">
+              <label class="check-item" wx:for="{{deptOptions}}" wx:key="label">
+                <checkbox value="{{item.label}}" checked="{{item.checked}}" color="#FF9800"/>
+                <text>{{item.label}}</text>
+              </label>
+            </view>
+          </scroll-view>
+          <view class="dept-empty" wx:else>
+            <text>暂无可选部门，将默认导出所有部门</text>
+          </view>
+        </checkbox-group>
+      </view>
+
+      <view class="export-section">
+        <text class="export-label required">接收邮箱地址</text>
+        <input
+          class="email-input"
+          type="text"
+          value="{{exportForm.email}}"
+          placeholder="请输入接收 CSV 的邮箱地址"
+          bindinput="onExportEmailInput"
+        />
+      </view>
+
+      <view class="dialog-actions">
+        <button class="dialog-btn cancel" bindtap="onCloseExportDialog">取消</button>
+        <button class="dialog-btn submit" loading="{{exportSubmitting}}" disabled="{{exportSubmitting}}" bindtap="onSubmitExport">生成并发送 CSV</button>
+      </view>
+    </view>
+  </view>
+</view>

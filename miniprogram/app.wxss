@@ -1,0 +1,46 @@
+/** 全局样式 **/
+page {
+  background-color: #F8F9FA;
+  font-family: "PingFang SC", "Helvetica Neue", "微软雅黑", sans-serif;
+  color: #333333;
+  --primary-color: #FF9800; /* 浅橙色主色调 */
+  --primary-light: #FFE0B2;
+  --bg-color: #F8F9FA;
+  --card-bg: #FFFFFF;
+  --text-main: #333333;
+  --text-sub: #888888;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 32rpx;
+}
+
+/* 倒圆角信息框基础样式 */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 主按钮样式 */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  padding: 24rpx 0;
+  text-align: center;
+  width: 100%;
+  border: none;
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+}

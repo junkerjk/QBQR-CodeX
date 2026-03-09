@@ -1,0 +1,84 @@
+.container {
+  padding: 20rpx;
+  background-color: #F5F7FA;
+  min-height: 100vh;
+}
+
+.empty-tips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+  color: #999;
+}
+
+.go-reserve {
+  margin-top: 40rpx;
+  background-color: #FF9800 !important;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.item-name { font-size: 32rpx; font-weight: bold; }
+.status { font-size: 26rpx; }
+.status.pending { color: #FF9800; }
+.status.approved { color: #07C160; }
+
+.info-row {
+  display: flex;
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+}
+
+.label { color: #999; width: 100rpx; }
+.value { color: #333; }
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f5f5f5;
+}
+
+.qr-btn {
+  background-color: #07C160;
+  color: #fff;
+}
+
+/* 二维码弹窗 */
+.qr-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.qr-content {
+  background-color: #fff;
+  width: 80%;
+  padding: 60rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-title { font-size: 36rpx; font-weight: bold; margin-bottom: 40rpx; }
+.qr-placeholder { margin-bottom: 40rpx; }
+.qr-tips { font-size: 28rpx; color: #666; text-align: center; margin-bottom: 40rpx; }
+.close-btn { width: 100%; }

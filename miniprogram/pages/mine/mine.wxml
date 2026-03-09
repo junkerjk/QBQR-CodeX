@@ -1,0 +1,88 @@
+<view class="container">
+  <!-- 个人信息头部 -->
+  <view class="profile-header">
+    <view class="avatar-box" style="background-color: {{userInfo.avatarColor}}">
+      <text class="avatar-text">{{userInfo.surname}}</text>
+    </view>
+    <view class="user-info">
+      <text class="user-name">{{userInfo.name || '未登录'}}</text>
+      <text class="user-dept">{{userInfo.dept || '影像部'}} - {{userInfo.role || '摄影师'}}</text>
+    </view>
+  </view>
+
+  <!-- 当前借用码 (Swiper) -->
+  <view class="qr-section" wx:if="{{activeOrders.length > 0}}">
+    <view class="section-title-row">
+      <text class="section-title">当前借用码</text>
+      <text class="section-tip">滑动查看</text>
+    </view>
+    <swiper class="qr-swiper" indicator-dots="{{activeOrders.length > 1}}" indicator-active-color="#FF9800">
+      <swiper-item wx:for="{{activeOrders}}" wx:key="_id">
+        <view class="qr-card">
+          <view class="status-tag {{item.qrStatusClass}}">
+            {{item.qrStatusText}}
+          </view>
+          <view class="qr-box">
+            <image wx:if="{{item.showQR}}" class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{item.borrowCode}}" mode="aspectFit"></image>
+            <view wx:else class="qr-placeholder">
+              <text class="placeholder-icon">⏳</text>
+              <text class="placeholder-text">借用码生成中...</text>
+            </view>
+          </view>
+          <view class="qr-info">
+            <text class="qr-label">借用码 (凭码领用/归还)</text>
+            <text class="qr-code">{{item.borrowCode || 'WAITING...'}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 借用记录列表 -->
+  <view class="record-section">
+    <text class="section-title">借用记录</text>
+    <scroll-view scroll-y class="record-list history-list">
+      <view class="empty-box" wx:if="{{orders.length === 0}}">
+        <text>暂无借用记录</text>
+      </view>
+      <view 
+        class="record-item" 
+        wx:for="{{orders}}" 
+        wx:key="_id" 
+        bindtap="onOrderClick" 
+        data-order="{{item}}"
+      >
+        <view class="record-main">
+          <view class="record-title-row">
+            <text class="record-name">{{item.packageName}}</text>
+            <text class="pkg-tag">{{item.pkgTag}}</text>
+          </view>
+          <text class="record-code">码: {{item.borrowCode || '待生成'}}</text>
+          <view class="record-date-row">
+            <view class="date-info">
+              <text class="icon">📅</text>
+              <text>{{item.applyDate}} - {{item.returnDate}}</text>
+            </view>
+            <text class="usage-days">累计使用：{{item.totalDays}} 天</text>
+          </view>
+        </view>
+        <view class="record-status">
+          <text class="status-text {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="footer-actions">
+    <button class="action-btn" bindtap="onAboutUs">
+      <text class="icon">❓</text>
+      <text>关于我们</text>
+    </button>
+    <button class="action-btn logout-btn" bindtap="onLogout">
+      <text class="icon">⛔</text>
+      <text>退出登录</text>
+    </button>
+    <text class="copyright">由 SFC 支持运维 v1.16.2</text>
+  </view>
+</view>

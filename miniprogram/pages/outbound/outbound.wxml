@@ -1,0 +1,104 @@
+<view class="container">
+  <scroll-view scroll-y class="content-scroll">
+    <!-- 申请人信息卡片 -->
+    <view class="card user-card">
+      <view class="user-header">
+        <view class="avatar-box">
+          <text class="avatar-text">{{firstChar}}</text>
+        </view>
+        <view class="user-info">
+          <view class="name-row">
+            <text class="user-name">{{order.applicant}}</text>
+            <text class="dept-tag">{{order.dept}}</text>
+          </view>
+          <text class="apply-time">申请时间: {{order.startDate}}</text>
+        </view>
+        <view class="status-badge">
+          <text class="icon">✓</text>
+          <text>已核准</text>
+        </view>
+      </view>
+
+      <view class="order-details">
+        <view class="detail-row">
+          <text class="icon">📅</text>
+          <text class="label">借用周期:</text>
+          <text class="value">{{order.startDate}} - {{order.endDate}} ({{order.totalDays}}天)</text>
+        </view>
+        <view class="detail-row">
+          <text class="icon">📦</text>
+          <text class="label">预约套餐:</text>
+          <text class="value">{{order.packageName}}</text>
+        </view>
+        <view class="remark-box">
+          <view class="remark-header">
+            <text class="icon">📝</text>
+            <text class="label">需求附言</text>
+            <text class="edit-tip">(库管员可修改)</text>
+          </view>
+          <textarea 
+            class="remark-input" 
+            value="{{order.remark}}" 
+            bindinput="onRemarkInput"
+            placeholder="请输入附言..."
+            auto-height
+          />
+        </view>
+      </view>
+    </view>
+
+    <!-- 设备清单点选 -->
+    <view class="section-title-row">
+      <view class="title-left">
+        <text class="icon">📋</text>
+        <text class="title">设备清单点选</text>
+      </view>
+      <text class="tip" wx:if="{{!isAppendMode}}">请勾选实际出库设备</text>
+    </view>
+
+    <view class="asset-list">
+      <view 
+        class="asset-item {{item.checked ? 'active' : ''}}" 
+        wx:for="{{assetList}}" 
+        wx:key="id"
+      >
+        <view class="asset-main" bindtap="onToggleAsset" data-index="{{index}}">
+          <checkbox wx:if="{{!isAppendMode}}" checked="{{item.checked}}" color="#FF9800" disabled="{{!isAppendMode && item.existingCount > 0 || (!item.checked && item.totalCount <= 0)}}"/>
+          <view class="asset-info" style="{{isAppendMode ? 'margin-left: 0;' : ''}}">
+            <text class="asset-name">{{item.name}} <text wx:if="{{isAppendMode && item.usingCount > 0}}" style="color: #FF9800; font-size: 22rpx;">(使用中: {{item.usingCount}})</text><text wx:elif="{{!isAppendMode && item.existingCount > 0}}" style="color: #FF9800; font-size: 22rpx;">(已出库: {{item.existingCount}})</text></text>
+            <text class="asset-id">ID: {{item.assetId}} | 库存: {{item.totalCount}}</text>
+          </view>
+        </view>
+        
+        <view class="count-ctrl">
+          <view class="ctrl-btn" catchtap="onCountChange" data-index="{{index}}" data-type="sub">－</view>
+          <text class="count-num">{{item.borrowCount}}</text>
+          <view class="ctrl-btn add" catchtap="onCountChange" data-index="{{index}}" data-type="add">＋</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部确认栏 -->
+  <view class="bottom-bar">
+    <view class="summary-info">
+      <view class="summary-left">
+        <text>已选设备: </text>
+        <text class="highlight">{{totalItems}}</text>
+        <text> 项</text>
+        <text class="divider">|</text>
+        <text>合计数量: </text>
+        <text class="highlight orange">{{totalCount}}</text>
+        <text> 件</text>
+      </view>
+      <view class="admin-id">
+        <text class="icon">✓</text>
+        <text>库管员已核验</text>
+      </view>
+    </view>
+    <button class="confirm-btn" bindtap="onConfirm">
+      <text class="icon">📱</text>
+      <text>确认放行</text>
+    </button>
+  </view>
+</view>
